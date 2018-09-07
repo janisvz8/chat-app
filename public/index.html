@@ -1,0 +1,59 @@
+<html>  
+    <head>
+      <title> Real Time Chat </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="stylesheet" href="style.css" />
+      <!-- Compiled and minified CSS -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!-- Compiled and minified JavaScript -->
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+        
+    </head>
+    <body>
+        
+        <div class="main">
+                <div class="row">
+                        <div class="col s12 m12">
+                          <div class="card" id="intro">
+                            <div class="card-image" style="height: 50px; background-color: lightcyan">
+                              
+                              <a class="btn-floating halfway-fab waves-effect waves-light red" onclick = "setUsername()"><i class="material-icons">add</i></a>
+                            </div>
+                            <div class="card-content">
+                              <p>Enter your name and click + to join the chat!</p>
+                              <input id = "name" type = "text" name = "name" value = "" placeholder = "Enter your name!">
+                            </div>
+                          </div>
+                          <div class="card" id="chatpage">
+                            <div class="header" style="height: 40px; background-color: #009688"></div>
+                            <div class="collection" id="users">
+                                
+                            </div>
+                            <div id="error-container"></div>
+        
+            
+                            <form id="myForm">
+                                <div class="txt-input">
+                                    <input id="message" type="text" placeholder="message">
+                                </div>
+                                <div>
+                                    <input type="submit" value="Send">
+                                </div>
+                                
+                            </form>
+                         </div>
+                        </div>
+                      </div>
+        
+
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+        <script src="/socket.io/socket.io.js"></script>
+
+        <script src="client.js"></script>  
+    </body>
+ </html>  
