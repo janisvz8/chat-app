@@ -10,7 +10,7 @@ app.use(function(req, res, next) {
 });
 
 var server = require('http').createServer(app);
-var io = socketio.listen(server, {log:false, origins:'*:*'});
+var io = require('socket.io')(server, {log:false, origins:'*:*'});
 
 app.get('/', function(req, res, next) {
     res.sendFile(__dirname + '/public/index.html')
