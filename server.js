@@ -1,15 +1,22 @@
 var express = require('express');
 var app = express();
-var server = require('http').createServer(app);
-var io = require('socket.io')(server);
-var cors = require('cors');
 
-app.use(cors()); 
-app.use(express.static('public'));
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.header("Access-Control-Allow-Headers", "Content-Type");
+    res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS");
+    next();
+});
+
+var server = require('http').createServer(app);
+var io = socketio.listen(server, {log:false, origins:'*:*'});
 
 app.get('/', function(req, res, next) {
     res.sendFile(__dirname + '/public/index.html')
 });
+
+app.use(express.static('public'));
 
 users = [];
 io.on('connection', function(socket) {
@@ -37,4 +44,4 @@ io.on('connection', function(socket) {
     });
 });
 
-server.listen(process.env.PORT || 3000);
+server.listen(process.env.PORT || 3001);
