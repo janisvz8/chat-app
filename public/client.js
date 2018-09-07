@@ -1,5 +1,7 @@
+
 // initializing socket, connection to server
-var socket = io.connect('https://mighty-brushlands-26857.herokuapp.com/');
+var socket = io.connect('http://localhost:3001');
+// var socket = io.connect('https://mighty-brushlands-26857.herokuapp.com/');
 socket.on('connect', function(data) {
     socket.emit('join', 'Hello server from client');
 });
@@ -30,7 +32,8 @@ socket.on('thread', function(data) {
 
 socket.on('broadcast',function(data) {
     //document.getElementById('users').innerHTML = data.description;
-    $('#users').append('<a href="#!" class="collection-item"><span class="online"></span>' + data.description + '</a>');
+    $( "#users" ).empty();
+    $('#users').append('<a href="#!" class="collection-item message">' + data.description + '<i class="material-icons">notification_important</i></a>');
  });
 
 // sends message to server, resets & prevents default form action

@@ -10,7 +10,7 @@ app.use(function(req, res, next) {
 });
 
 var server = require('http').createServer(app);
-var io = require('socket.io')(server, {log:false, origins:'*:*'});
+var io = require('socket.io')(server);
 
 app.get('/', function(req, res, next) {
     res.sendFile(__dirname + '/public/index.html')
@@ -22,20 +22,24 @@ users = [];
 io.on('connection', function(socket) {
     console.log('A user connected');
     socket.on('setUsername', function(data) {
-        console.log(users);
+        //onsole.log(users);
         if(users.indexOf(data) > -1) {
-            socket.emit('userExists', data + ' username is taken! Try some other username.');
-            
+            io.sockets.emit('broadcast',{ description: data + ' has joined!' });
+            // socket.emit('userExists', data + ' username is taken! Try some other username.');
+            socket.emit('userSet', {username: data})
         } else {
+            socket.username = data;
             users.push(data); 
-            io.sockets.emit('broadcast',{ description: data });
+            io.sockets.emit('broadcast',{ description: data + ' has joined!' });
             socket.emit('userSet', {username: data});
         }
     })
     //io.sockets.emit('broadcast',{ description: clients + ' clients connected!'});
     socket.on('disconnect', function(data) {
-        console.log('disconnected');
-        io.sockets.emit('broadcast',{ description: data + 'disconnected!'});
+        var index = users.indexOf(socket.username);
+        users.splice(index, 1);
+        console.log(users);
+        io.sockets.emit('broadcast',{ description: socket.username + ' has left the chat!'});
     });
 
     socket.on('messages', function(data){

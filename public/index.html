@@ -25,22 +25,19 @@
                               <p>Enter your name and click + to join the chat!</p>
                               <input id = "name" type = "text" name = "name" value = "" placeholder = "Enter your name!">
                             </div>
+                            <div id="error-container"></div>
                           </div>
                           <div class="card" id="chatpage">
                             <div class="header" style="height: 40px; background-color: #009688"></div>
+                            <div class="notify">Notifications</div> 
                             <div class="collection" id="users">
-                                
+                               
                             </div>
-                            <div id="error-container"></div>
-        
-            
                             <form id="myForm">
                                 <div class="txt-input">
                                     <input id="message" type="text" placeholder="message">
                                 </div>
-                                <div>
                                     <input type="submit" value="Send">
-                                </div>
                                 
                             </form>
                          </div>
@@ -52,7 +49,8 @@
 
         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
-        <script src="https://mighty-brushlands-26857.herokuapp.com/socket.io/socket.io.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <!-- <script src="https://mighty-brushlands-26857.herokuapp.com/socket.io/socket.io.js"></script> -->
 
         <script src="client.js"></script>  
     </body>
